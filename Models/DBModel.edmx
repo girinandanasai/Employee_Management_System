@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBuserSignupLoginModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Date_of_birth" Type="varchar" MaxLength="50" />
+          <Property Name="Father_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Mother_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Salary" Type="int" />
+          <Property Name="Fresher" Type="varchar" MaxLength="50" />
+          <Property Name="Role" Type="varchar" MaxLength="50" />
+          <Property Name="Notes" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBLUserInfo">
+          <Key>
+            <PropertyRef Name="IdUs" />
+          </Key>
+          <Property Name="IdUs" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserNameUs" Type="varchar" MaxLength="20" />
+          <Property Name="PasswordUs" Type="varchar" MaxLength="255" />
+          <Property Name="RePasswordUs" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityContainer Name="DBuserSignupLoginModelStoreContainer">
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLUserInfo" EntityType="Self.TBLUserInfo" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBuserSignupLoginModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Date_of_birth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Father_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mother_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Salary" Type="Int32" />
+          <Property Name="Fresher" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBLUserInfo">
+          <Key>
+            <PropertyRef Name="IdUs" />
+          </Key>
+          <Property Name="IdUs" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserNameUs" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PasswordUs" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RePasswordUs" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="DBuserSignupLoginEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="TBLUserInfoes" EntityType="Self.TBLUserInfo" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBuserSignupLoginModelStoreContainer" CdmEntityContainer="DBuserSignupLoginEntities2">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="DBuserSignupLoginModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Date_of_birth" ColumnName="Date_of_birth" />
+                <ScalarProperty Name="Father_Name" ColumnName="Father_Name" />
+                <ScalarProperty Name="Mother_Name" ColumnName="Mother_Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Fresher" ColumnName="Fresher" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLUserInfoes">
+            <EntityTypeMapping TypeName="DBuserSignupLoginModel.TBLUserInfo">
+              <MappingFragment StoreEntitySet="TBLUserInfo">
+                <ScalarProperty Name="IdUs" ColumnName="IdUs" />
+                <ScalarProperty Name="UserNameUs" ColumnName="UserNameUs" />
+                <ScalarProperty Name="PasswordUs" ColumnName="PasswordUs" />
+                <ScalarProperty Name="RePasswordUs" ColumnName="RePasswordUs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
