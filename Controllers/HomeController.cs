@@ -40,6 +40,21 @@ namespace WebApplication2.Controllers
                 ViewBag.Notification = "This account already exists";
                 return View();
             }
+            else if (String.IsNullOrEmpty(tBLUserInfo.UserNameUs) || String.IsNullOrEmpty(tBLUserInfo.PasswordUs)|| String.IsNullOrEmpty(tBLUserInfo.RePasswordUs))
+            {
+                ViewBag.Notification = "Username and password is required";
+                return View();
+            }
+            else if(tBLUserInfo.PasswordUs!=tBLUserInfo.RePasswordUs)
+            {
+                //ViewBag.Notification = "Password and Repassword does n't match";
+                return View();
+            }
+            else if(tBLUserInfo.PasswordUs.ToString().Length<8 || tBLUserInfo.PasswordUs.ToString().Length > 15)
+            {
+                //ViewBag.Notification = "Password should be minimum 8 characters and less than 15 characters";
+                return View();
+            }
             else
             {
                 db.TBLUserInfoes.Add(tBLUserInfo);
@@ -74,6 +89,10 @@ namespace WebApplication2.Controllers
                 Session["IdUsSS"] = tBLUserInfo.IdUs.ToString();
                 Session["UserNameSS"] = tBLUserInfo.UserNameUs.ToString();
                 return RedirectToAction("LoginInfo", "Home");
+            }
+            else if(String.IsNullOrEmpty(tBLUserInfo.UserNameUs)&& String.IsNullOrEmpty(tBLUserInfo.PasswordUs))
+            {
+                
             }
             else
             {
