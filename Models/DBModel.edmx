@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBuserSignupLoginModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBuserSignupLoginModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="id" />
@@ -20,6 +20,15 @@
           <Property Name="Role" Type="varchar" MaxLength="50" />
           <Property Name="Notes" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Employee_Login">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="role" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="repassword" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="TBLUserInfo">
           <Key>
             <PropertyRef Name="IdUs" />
@@ -31,10 +40,10 @@
         </EntityType>
         <EntityContainer Name="DBuserSignupLoginModelStoreContainer">
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee_Login" EntityType="Self.Employee_Login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLUserInfo" EntityType="Self.TBLUserInfo" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBuserSignupLoginModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -65,7 +74,17 @@
         <EntityContainer Name="DBuserSignupLoginEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="TBLUserInfoes" EntityType="Self.TBLUserInfo" />
+          <EntitySet Name="Employee_Login" EntityType="DBuserSignupLoginModel.Employee_Login" />
         </EntityContainer>
+        <EntityType Name="Employee_Login">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="repassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -95,6 +114,16 @@
                 <ScalarProperty Name="UserNameUs" ColumnName="UserNameUs" />
                 <ScalarProperty Name="PasswordUs" ColumnName="PasswordUs" />
                 <ScalarProperty Name="RePasswordUs" ColumnName="RePasswordUs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee_Login">
+            <EntityTypeMapping TypeName="DBuserSignupLoginModel.Employee_Login">
+              <MappingFragment StoreEntitySet="Employee_Login">
+                <ScalarProperty Name="repassword" ColumnName="repassword" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

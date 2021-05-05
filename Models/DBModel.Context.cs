@@ -27,5 +27,6 @@ namespace WebApplication2.Models
     
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<TBLUserInfo> TBLUserInfoes { get; set; }
+        public virtual DbSet<Employee_Login> Employee_Login { get; set; }
     }
 }

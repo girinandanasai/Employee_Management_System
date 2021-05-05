@@ -218,7 +218,9 @@
     <Compile Include="Models\Employee.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EmployeeClass.cs" />
+    <Compile Include="Models\Employee_Login.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TBLUserInfo.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -293,15 +295,22 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Signup.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\LoginInfo.cshtml" />
     <Content Include="Views\InsertEmployee\Index.cshtml" />
     <Content Include="Views\EmployeeInsert\Index.cshtml" />
     <Content Include="Views\EmployeeInsert\Edit.cshtml" />
     <Content Include="Views\EmployeeInsert\Delete.cshtml" />
+    <Content Include="Views\Home\Signupe.cshtml" />
+    <Content Include="Views\Home\emphome.cshtml" />
+    <Content Include="Views\Home\Logine.cshtml" />
+    <Content Include="Views\Home\Passupd.cshtml" />
+    <Content Include="Views\Home\LoginInfo.cshtml" />
+    <Content Include="Views\Home\LoginInfo1.cshtml" />
+    <Content Include="Views\Home\LoginInfo2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Crud\" />
+    <Folder Include="Views\EmployeeLogin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

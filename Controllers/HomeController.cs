@@ -20,7 +20,10 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
-        
+        public ActionResult Signupe()
+        {
+            return View();
+        }
 
         public ActionResult Signup()
         {
@@ -30,7 +33,19 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
-       
+        public ActionResult LoginInfo1()
+        {
+            return View();
+        }
+        public ActionResult LoginInfo2()
+        {
+            return View();
+        }
+        public ActionResult emphome()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         public ActionResult Signup(TBLUserInfo tBLUserInfo)
@@ -66,7 +81,44 @@ namespace WebApplication2.Controllers
             }
 
         }
+        [HttpPost]
+        public ActionResult Signupe(Employee_Login employee_Login,Employee employee)
+        {
+            if (db.Employee_Login.Any(x => x.id == employee_Login.id))
+            {
+                ViewBag.Notification = "This account already exists";
+                return View();
+            }
+            else if (String.IsNullOrEmpty(employee_Login.id) || String.IsNullOrEmpty(employee_Login.password) || String.IsNullOrEmpty(employee_Login.repassword)|| String.IsNullOrEmpty(employee_Login.role))
+            {
+                ViewBag.Notification = "Id, role and password are required";
+                return View();
+            }
+            else if (employee_Login.password != employee_Login.repassword)
+            {
+                //ViewBag.Notification = "Password and Repassword does n't match";
+                return View();
+            }
+            else if (employee_Login.password.ToString().Length < 8 || employee_Login.password.ToString().Length > 15)
+            {
+                //ViewBag.Notification = "Password should be minimum 8 characters and less than 15 characters";
+                return View();
+            }
+            else if(db.Employees.All(x => x.id.ToString() != employee_Login.id))
+            {
+                ViewBag.Notification = "Registration with employee id "+ employee_Login.id+" is not allowed. Please contact admin!";
+                return View();
+            }
+            else
+            {
+                db.Employee_Login.Add(employee_Login);
+                db.SaveChanges();
+                ViewBag.Notification = "The account has been successfully registered!Please login to continue";
+                Session["IdUsSS1"] = employee_Login.id.ToString();
+                return View() ;
+            }
 
+        }
         public ActionResult Logout()
         {
             Session.Clear();
@@ -76,6 +128,40 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public ActionResult Login()
         {
+            return View();
+        }
+        public ActionResult Logine()
+        {
+            return View();
+        }
+        public ActionResult Passupd()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Passupd(TBLUserInfo tBLUserInfo)
+        {
+            using (DBuserSignupLoginEntities2 db=new DBuserSignupLoginEntities2())
+            {
+                var detail = db.TBLUserInfoes.Where(x => x.PasswordUs == tBLUserInfo.PasswordUs).FirstOrDefault();
+                if (detail != null)
+                {
+                    var userdetail = db.TBLUserInfoes.FirstOrDefault(x => x.PasswordUs == tBLUserInfo.PasswordUs);
+                    var userdetail1 = db.TBLUserInfoes.FirstOrDefault(x => x.UserNameUs == tBLUserInfo.UserNameUs);
+                    if (userdetail != null&& userdetail1 != null)
+                    {
+                        userdetail.PasswordUs = tBLUserInfo.NewPasswordUs;
+                        userdetail.RePasswordUs = tBLUserInfo.NewPasswordUs;
+                        db.SaveChanges();
+                        ViewBag.Message = "Password changed successfully";
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Password not updated";
+                    }
+                }
+            }
             return View();
         }
 
@@ -93,6 +179,27 @@ namespace WebApplication2.Controllers
             else if(String.IsNullOrEmpty(tBLUserInfo.UserNameUs)&& String.IsNullOrEmpty(tBLUserInfo.PasswordUs))
             {
                 
+            }
+            else
+            {
+                ViewBag.Notification = "Wrong Username or Password";
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Logine(Employee_Login employee_Login)
+        {
+            var checkLogin = db.Employee_Login.Where(x => x.id.Equals(employee_Login.id) && x.password.Equals(employee_Login.password)).FirstOrDefault();
+            if (checkLogin != null)
+            {
+                Session["IdUsSS1"] = employee_Login.id.ToString();
+                return RedirectToAction("emphome", "Home");
+            }
+            else if (String.IsNullOrEmpty(employee_Login.id) && String.IsNullOrEmpty(employee_Login.password))
+            {
+
             }
             else
             {
