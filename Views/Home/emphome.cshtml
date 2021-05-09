@@ -1,7 +1,7 @@
 ﻿@model WebApplication2.Models.TBLUserInfo
 
 @{
-    ViewBag.Title = "Employee home";
+    ViewBag.Title = "Employee home Page";
 }
 
 
@@ -33,8 +33,8 @@
 
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-            <li>@Html.ActionLink("Task Report", "Signupe", "Home")</li>
-            <li>@Html.ActionLink("Leave Request", "Signupe", "Home")</li>
+            <li>@Html.ActionLink("Task Report", "Index", "Task_Report")</li>
+            <li>@Html.ActionLink("Leave Request", "Create", "Leave_Request")</li>
         </ul>
     </div>
 </div>

@@ -1,0 +1,86 @@
+﻿@model IEnumerable<WebApplication2.Models.Task_report>
+@{
+    ViewBag.Title = "View Task";
+}
+
+<h2>View Task Details</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Index")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.emp_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.task_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.start_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.end_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.task_duration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.team_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.summary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.risk)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.risk_details)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.risk_resolution)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.task_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.start_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.end_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.task_duration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.team_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.summary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.risk)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.risk_details)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.risk_resolution)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

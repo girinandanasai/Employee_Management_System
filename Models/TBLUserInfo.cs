@@ -25,8 +25,8 @@ namespace WebApplication2.Models
         [Required(ErrorMessage = "This Field is Required")]
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
-        [MinLength(8,ErrorMessage ="Minimum 8 characters required")]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$",ErrorMessage="Password must be between 8 and 15 characters and should have atleast one uppercase,lowercase,digit and special character")]
+        [MinLength(8, ErrorMessage = "Minimum 8 characters required")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$", ErrorMessage = "Password must be between 8 and 15 characters and should have atleast one uppercase,lowercase,digit and special character")]
         public string PasswordUs { get; set; }
 
         [Required(ErrorMessage = "This Field is Required")]
@@ -36,7 +36,7 @@ namespace WebApplication2.Models
         [Compare("PasswordUs", ErrorMessage = "Confirm password does n't match, type again!")]
         public string RePasswordUs { get; set; }
 
-        
+
         public string NewPasswordUs { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace WebApplication2.Controllers
     {
         public IHttpActionResult insertemployees(Employee sc)
         {
-            DBuserSignupLoginEntities2 nd = new DBuserSignupLoginEntities2();
+            DBuserSignupLoginEntities3 nd = new DBuserSignupLoginEntities3();
             nd.Employees.Add(new Employee()
             {
                 id = sc.id,

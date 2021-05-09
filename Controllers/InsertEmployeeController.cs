@@ -19,7 +19,7 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ActionResult Index(Employee sc)
         {
-            DBuserSignupLoginEntities2 db = new DBuserSignupLoginEntities2();
+            DBuserSignupLoginEntities3 db = new DBuserSignupLoginEntities3();
             if (db.Employees.Any(x => x.id == sc.id))
             {
                 ViewBag.Notification = "This Employee already exists";

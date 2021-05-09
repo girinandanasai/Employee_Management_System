@@ -13,7 +13,7 @@ namespace WebApplication2.Controllers
 {
     public class EmployeeInsertController : Controller
     {
-        DBuserSignupLoginEntities2 db = new DBuserSignupLoginEntities2();
+        DBuserSignupLoginEntities3 db = new DBuserSignupLoginEntities3();
         // GET: EmployeeInsert
         public ActionResult Index()
         { 
@@ -23,7 +23,7 @@ namespace WebApplication2.Controllers
         // GET: Crud/Edit/5
         public ActionResult Edit(int id)
         {
-            using(DBuserSignupLoginEntities2 db=new DBuserSignupLoginEntities2())
+            using(DBuserSignupLoginEntities3 db=new DBuserSignupLoginEntities3())
             {
                 return View(db.Employees.Where(x => x.id == id).FirstOrDefault());
             }
@@ -35,7 +35,7 @@ namespace WebApplication2.Controllers
         {
             try
             {
-                using (DBuserSignupLoginEntities2 db = new DBuserSignupLoginEntities2())
+                using (DBuserSignupLoginEntities3 db = new DBuserSignupLoginEntities3())
                 {
                     db.Entry(employee).State = EntityState.Modified;
                     db.SaveChanges();
@@ -51,7 +51,7 @@ namespace WebApplication2.Controllers
         // GET: Crud/Delete/5
         public ActionResult Delete(int id)
         {
-            using (DBuserSignupLoginEntities2 db = new DBuserSignupLoginEntities2())
+            using (DBuserSignupLoginEntities3 db = new DBuserSignupLoginEntities3())
             {
                 return View(db.Employees.Where(x => x.id == id).FirstOrDefault());
             }
@@ -63,7 +63,7 @@ namespace WebApplication2.Controllers
         {
             try
             {
-                using (DBuserSignupLoginEntities2 db = new DBuserSignupLoginEntities2())
+                using (DBuserSignupLoginEntities3 db = new DBuserSignupLoginEntities3())
                 {
                     Employee employee = db.Employees.Where(x => x.id == id).FirstOrDefault();
                     db.Employees.Remove(employee);

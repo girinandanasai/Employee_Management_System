@@ -13,7 +13,7 @@ namespace WebApplication2.Controllers
 {
     public class HomeController : Controller
     {
-        DBuserSignupLoginEntities2 db = new DBuserSignupLoginEntities2();
+        DBuserSignupLoginEntities3 db = new DBuserSignupLoginEntities3();
 
         // GET: Home
         public ActionResult Index()
@@ -142,7 +142,7 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ActionResult Passupd(TBLUserInfo tBLUserInfo)
         {
-            using (DBuserSignupLoginEntities2 db=new DBuserSignupLoginEntities2())
+            using (DBuserSignupLoginEntities3 db=new DBuserSignupLoginEntities3())
             {
                 var detail = db.TBLUserInfoes.Where(x => x.PasswordUs == tBLUserInfo.PasswordUs).FirstOrDefault();
                 if (detail != null)
@@ -197,7 +197,7 @@ namespace WebApplication2.Controllers
                 Session["IdUsSS1"] = employee_Login.id.ToString();
                 return RedirectToAction("emphome", "Home");
             }
-            else if (String.IsNullOrEmpty(employee_Login.id) && String.IsNullOrEmpty(employee_Login.password))
+            else if (String.IsNullOrEmpty(employee_Login.id) || String.IsNullOrEmpty(employee_Login.password))
             {
 
             }
