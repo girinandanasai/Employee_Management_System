@@ -23,7 +23,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    
+
                 </ul>
                 @if (Session["UserNameSS"] != null)
                 {
@@ -36,13 +36,25 @@
                         <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
                     </ul>
                 }
-                else
+                else if(Session["IdUsSS1"] == null&& Session["UserNameSS"] == null)
                 {
                     <ul class="nav navbar-nav" style="float:right !important">
                         <li>@Html.ActionLink("Signup", "LoginInfo1", "Home")</li>
                         <li>@Html.ActionLink("Login", "LoginInfo2", "Home")</li>
                     </ul>
                 }
+                @if (Session["IdUsSS1"] != null)
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Task Report", "Index", "Task_Report")</li>
+                        <li>@Html.ActionLink("Leave Request", "Index", "Leave_Request")</li>
+                    </ul>
+                    <ul class="nav navbar-nav" style="float:right !important">
+                        <li><p style="color:#fff;margin-top:15px;">Hello @Session["IdUsSS1"]</p></li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+                    </ul>
+                }
+                
             </div>
         </div>
     </div>

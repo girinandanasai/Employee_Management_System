@@ -30,5 +30,6 @@ namespace WebApplication2.Models
         public virtual DbSet<TBLUserInfo> TBLUserInfoes { get; set; }
         public virtual DbSet<Task_report> Task_report { get; set; }
         public virtual DbSet<Team_names> Team_names { get; set; }
+        public virtual DbSet<Leave_request> Leave_request { get; set; }
     }
 }

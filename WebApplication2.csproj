@@ -197,6 +197,7 @@
     <Compile Include="Controllers\EmployeeInsertController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InsertEmployeeController.cs" />
+    <Compile Include="Controllers\Leave_RequestController.cs" />
     <Compile Include="Controllers\Task_ReportController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -220,6 +221,9 @@
       <DependentUpon>DBModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Employee_Login.cs">
+      <DependentUpon>DBModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Leave_request.cs">
       <DependentUpon>DBModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Task_report.cs">
@@ -317,6 +321,13 @@
     <Content Include="Views\Task_Report\Index1.cshtml" />
     <Content Include="Views\Task_Report\Edit.cshtml" />
     <Content Include="Views\Task_Report\Delete.cshtml" />
+    <Content Include="Views\Task_Report\Index2.cshtml" />
+    <Content Include="Views\Leave_Request\Index.cshtml" />
+    <Content Include="Views\Leave_Request\Index1.cshtml" />
+    <Content Include="Views\Leave_Request\Index2.cshtml" />
+    <Content Include="Views\Leave_Request\Edit.cshtml" />
+    <Content Include="Views\Leave_Request\Delete.cshtml" />
+    <Content Include="Views\Leave_Request\Edit1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

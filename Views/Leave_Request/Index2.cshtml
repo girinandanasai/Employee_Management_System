@@ -1,0 +1,131 @@
+﻿@model IEnumerable<WebApplication2.Models.Leave_request>
+
+@{
+    ViewBag.Title = "Leave_Request";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View Leave Request</title>
+</head>
+<body>
+    <h2>Leave_Request Admin</h2>
+    <p>
+        @using (Html.BeginForm("ExportToExcel", "Leave_Request", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div>
+                <input type="submit" value="Export" class="btn-primary" />
+            </div>
+        }
+        @using (Html.BeginForm("Index2", "Leave_Request", FormMethod.Get))
+        {
+            <b>Search By:</b> @Html.RadioButton("searchBy", "Employee Id", true) <text>Employee Id</text>
+            @Html.RadioButton("searchBy", "Employee Name") <text>Employee Name</text>
+            @Html.RadioButton("searchBy", "Start Date") <text>Start Date</text>
+            @Html.RadioButton("searchBy", "End Date") <text>End Date</text>
+            @Html.RadioButton("searchBy", "Leave Type") <text>Leave Type</text><br />
+            @Html.TextBox("search")<input type="submit" value="Search" />
+        }
+    </p>
+    @using (Html.BeginForm("DownloadFile", "Leave_Request", FormMethod.Post))
+    {
+        <input type="hidden" id="hfFileId" name="FileId" />
+        <input type="submit" id="btnDownload" value="Download" style="display:none" />
+    }
+    <table class="table" border="1">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.emp_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.emp_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.start_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.end_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.leave_type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.reason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ref_no)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comments)
+            </th>
+            <th >
+                Download Supp Doc
+            </th>
+       
+        </tr>
+            @if(Model.Count()==10)
+            {
+                <tr>
+                    <td colspan="4">
+                        No rows match search criteria
+                    </td>
+                </tr>
+            }
+            else
+            { 
+        foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.start_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.end_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.leave_type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.reason)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ref_no)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+        <td>
+            <a href="javascript:;" onclick="DownloadFile(@item.id)">Download</a>
+        </td>
+        <td>
+            @Html.ActionLink("Approval", "Edit1", new { id = item.id })
+        </td>
+    </tr>
+        }
+}
+    </table>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        function DownloadFile(fileId) {
+            $("#hfFileId").val(fileId);
+            $("#btnDownload")[0].click();
+        };
+    </script>
+</body>
+</html>

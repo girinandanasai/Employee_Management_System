@@ -1,0 +1,105 @@
+﻿@model IEnumerable<WebApplication2.Models.Leave_request>
+
+@{
+    ViewBag.Title = "Leave Request";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View Leave Request</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Index")
+    </p>
+    @using (Html.BeginForm("DownloadFile", "Leave_Request", FormMethod.Post))
+    {
+        <input type="hidden" id="hfFileId" name="FileId" />
+        <input type="submit" id="btnDownload" value="Download" style="display:none" />
+    }
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.emp_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.emp_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.start_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.end_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.leave_type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.reason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ref_no)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comments)
+            </th>
+            <th>
+                Download Supp Doc
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.emp_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.emp_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.start_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.end_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.leave_type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.reason)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ref_no)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+                <td>
+                    <a href="javascript:;" onclick="DownloadFile(@item.id)">Download</a>
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        function DownloadFile(fileId) {
+            $("#hfFileId").val(fileId);
+            $("#btnDownload")[0].click();
+        };
+    </script>
+    </body>
+</html>

@@ -75,8 +75,8 @@ namespace WebApplication2.Controllers
                 db.TBLUserInfoes.Add(tBLUserInfo);
                 db.SaveChanges();
                 ViewBag.Notification = "The account has been successfully registered!";
-                Session["IdUsSS"] = tBLUserInfo.IdUs.ToString();
-                Session["UserNameSS"] = tBLUserInfo.UserNameUs.ToString();
+                //Session["IdUsSS"] = tBLUserInfo.IdUs.ToString();
+                //Session["UserNameSS"] = tBLUserInfo.UserNameUs.ToString();
                 return RedirectToAction("LoginInfo", "Home");
             }
 

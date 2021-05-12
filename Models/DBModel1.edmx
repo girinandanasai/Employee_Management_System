@@ -29,6 +29,25 @@
           <Property Name="password" Type="nvarchar" MaxLength="50" />
           <Property Name="repassword" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Leave_request">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_id" Type="int" Nullable="false" />
+          <Property Name="emp_name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="start_date" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="end_date" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="leave_type" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="reason" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ref_no" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="status" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="file_name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Content_type" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="file_data" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Active" Type="int" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Task_report">
           <Key>
             <PropertyRef Name="id" />
@@ -65,6 +84,7 @@
         <EntityContainer Name="DBuserSignupLoginModelStoreContainer">
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee_Login" EntityType="Self.Employee_Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Leave_request" EntityType="Self.Leave_request" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Task_report" EntityType="Self.Task_report" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLUserInfo" EntityType="Self.TBLUserInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Team_names" EntityType="Self.Team_names" Schema="dbo" store:Type="Tables" />
@@ -112,6 +132,7 @@
           <EntitySet Name="TBLUserInfoes" EntityType="Self.TBLUserInfo" />
           <EntitySet Name="Task_report" EntityType="DBuserSignupLoginModel.Task_report" />
           <EntitySet Name="Team_names" EntityType="DBuserSignupLoginModel.Team_names" />
+          <EntitySet Name="Leave_request" EntityType="DBuserSignupLoginModel.Leave_request" />
         </EntityContainer>
         <EntityType Name="Task_report">
           <Key>
@@ -136,6 +157,25 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="Team_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Leave_request">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emp_id" Type="Int32" Nullable="false" />
+          <Property Name="emp_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="start_date" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="end_date" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="leave_type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="reason" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ref_no" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="file_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Content_type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="file_data" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -201,6 +241,26 @@
             <EntityTypeMapping TypeName="DBuserSignupLoginModel.Team_names">
               <MappingFragment StoreEntitySet="Team_names">
                 <ScalarProperty Name="Team_name" ColumnName="Team_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Leave_request">
+            <EntityTypeMapping TypeName="DBuserSignupLoginModel.Leave_request">
+              <MappingFragment StoreEntitySet="Leave_request">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="file_data" ColumnName="file_data" />
+                <ScalarProperty Name="Content_type" ColumnName="Content_type" />
+                <ScalarProperty Name="file_name" ColumnName="file_name" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="ref_no" ColumnName="ref_no" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="leave_type" ColumnName="leave_type" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="emp_name" ColumnName="emp_name" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
