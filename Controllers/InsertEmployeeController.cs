@@ -37,7 +37,7 @@ namespace WebApplication2.Controllers
                 }
                 else
                 {
-                    ViewBag.message = "Record is not saved successfully";
+                    ViewBag.message = "Please give the required fields";
                 }
                 return View();
             }
