@@ -14,23 +14,41 @@ namespace WebApplication2.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public partial class Employee_Login
+    public partial class Admin
     {
+        public int IdUs { get; set; }
+
         [Required(ErrorMessage = "This Field is Required")]
-        [Display(Name = "Id")]
-        public string id { get; set; }
+        [Display(Name = "Username")]
+        public string UserNameUs { get; set; }
 
         [Required(ErrorMessage = "This Field is Required")]
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
-        [MinLength(6, ErrorMessage = "Minimum 6 characters required")]
+        [MinLength(8, ErrorMessage = "Minimum 8 characters required")]
         
-        public string password { get; set; }
+        public string PasswordUs { get; set; }
+
         [Required(ErrorMessage = "This Field is Required")]
         [Display(Name = "Confirm Password")]
         [DataType(DataType.Password)]
-        [Compare("password", ErrorMessage = "Confirm password does n't match, type again!")]
+        [Compare("PasswordUs", ErrorMessage = "Confirm password does n't match, type again!")]
         [NotMapped]
-        public string repassword { get; set; }
+        public string RePasswordUs { get; set; }
+
+        [Required(ErrorMessage = "This Field is Required")]
+        [Display(Name = "New Password")]
+        [DataType(DataType.Password)]
+        [NotMapped]
+        public string NewPasswordUs { get; set; }
+
+        [Required(ErrorMessage = "This Field is Required")]
+        [Display(Name = "Confirm New Password")]
+        [DataType(DataType.Password)]
+        [Compare("NewPasswordUs", ErrorMessage = "New Confirm password does n't match, type again!")]
+        [NotMapped]
+        public string ReNewPasswordUs { get; set; }
+
+
     }
 }

@@ -13,7 +13,6 @@ namespace WebApplication2.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Web.UI.WebControls;
 
     public partial class Leave_request
     {
@@ -41,7 +40,7 @@ namespace WebApplication2.Models
         public string ref_no { get; set; }
         public string status { get; set; }
         [Required(ErrorMessage = "This Field is Required")]
-        [Display(Name ="Support Document")]
+        [Display(Name = "Support Document")]
         public string file_name { get; set; }
         public string Content_type { get; set; }
         public byte[] file_data { get; set; }
