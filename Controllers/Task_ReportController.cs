@@ -29,14 +29,9 @@ namespace WebApplication2.Controllers
             {
                 task_Report.risk = "0";
             }
-            if (db.Employees.All(x => x.id != task_Report.emp_id))
+            if (String.IsNullOrEmpty(task_Report.emp_id.ToString()) || String.IsNullOrEmpty(task_Report.team_name) || String.IsNullOrEmpty(task_Report.summary))
             {
-                ViewBag.Notification = "This employee id does not exists";
-                return View();
-            }
-            else if(Convert.ToInt32(Session["IdUsSS1"]) != task_Report.emp_id)
-            {
-                ViewBag.Notification = "Give your employee id";
+                //ViewBag.Notification = "Id, role and password are required";
                 return View();
             }
             else if (String.IsNullOrEmpty(task_Report.start_date) || String.IsNullOrEmpty(task_Report.end_date))
@@ -44,9 +39,14 @@ namespace WebApplication2.Controllers
                 ViewBag.Notification = "start date and end date are required";
                 return View();
             }
-            else if (String.IsNullOrEmpty(task_Report.emp_id.ToString()) || String.IsNullOrEmpty(task_Report.start_date) || String.IsNullOrEmpty(task_Report.end_date) || String.IsNullOrEmpty(task_Report.team_name) || String.IsNullOrEmpty(task_Report.summary) || String.IsNullOrEmpty(task_Report.task_duration.ToString()))
+            else if (db.Employees.All(x => x.id != task_Report.emp_id))
             {
-                //ViewBag.Notification = "Id, role and password are required";
+                ViewBag.Notification = "This employee id does not exists";
+                return View();
+            }
+            else if(Convert.ToInt32(Session["IdUsSS1"]) != task_Report.emp_id)
+            {
+                ViewBag.Notification = "Give your employee id";
                 return View();
             }
             else if (db.Team_names.All(x => x.Team_name != task_Report.team_name))
@@ -59,25 +59,27 @@ namespace WebApplication2.Controllers
                 if (String.IsNullOrEmpty(task_Report.risk_details) || String.IsNullOrEmpty(task_Report.risk_resolution))
                 {
                     ViewBag.Notification = "Risk details and risk resolution are required";
+                    return View();
                 }
-                return View();
-            }
-            else
-            {
-                DateTime startD = DateTime.Parse(task_Report.start_date);
-                DateTime endD = DateTime.Parse(task_Report.end_date);
-                double calcBusinessDays = 1 + ((endD - startD).TotalDays * 5 - (startD.DayOfWeek - endD.DayOfWeek) * 2) / 7;
+                else
+                {
+                    DateTime startD = DateTime.Parse(task_Report.start_date);
+                    DateTime endD = DateTime.Parse(task_Report.end_date);
+                    double calcBusinessDays = 1 + ((endD - startD).TotalDays * 5 - (startD.DayOfWeek - endD.DayOfWeek) * 2) / 7;
 
-                if (endD.DayOfWeek == DayOfWeek.Saturday) calcBusinessDays--;
-                if (startD.DayOfWeek == DayOfWeek.Sunday) calcBusinessDays--;
-                task_Report.task_duration = (int)calcBusinessDays;
-                task_Report.Active = 1;
-                ViewData["msg"] = task_Report;
-                db.Task_report.Add(task_Report);
-                db.SaveChanges();
-                ViewBag.Notification = "The report has been successfully saved!";
-                return View();
+                    if (endD.DayOfWeek == DayOfWeek.Saturday) calcBusinessDays--;
+                    if (startD.DayOfWeek == DayOfWeek.Sunday) calcBusinessDays--;
+                    task_Report.task_duration = (int)calcBusinessDays;
+                    task_Report.Active = 1;
+                    ViewData["msg"] = task_Report;
+                    db.Task_report.Add(task_Report);
+                    db.SaveChanges();
+                    ViewBag.Notification1 = "The task report has been successfully created!";
+                    return View();
+                }
+                
             }
+            return View();
            
         }
         // GET: EmployeeInsert
@@ -114,14 +116,9 @@ namespace WebApplication2.Controllers
                 {
                     task_Report.risk = "0";
                 }
-                if (db.Employees.All(x => x.id != task_Report.emp_id))
+                if (String.IsNullOrEmpty(task_Report.emp_id.ToString()) || String.IsNullOrEmpty(task_Report.start_date) || String.IsNullOrEmpty(task_Report.end_date) || String.IsNullOrEmpty(task_Report.team_name) || String.IsNullOrEmpty(task_Report.summary) || String.IsNullOrEmpty(task_Report.task_duration.ToString()))
                 {
-                    ViewBag.Notification = "This employee id does not exists";
-                    return View();
-                }
-                else if (Convert.ToInt32(Session["IdUsSS1"]) != task_Report.emp_id)
-                {
-                    ViewBag.Notification = "employee id can't be edited";
+                    ViewBag.Notification = "Id/start date/end date/summary/team name are required";
                     return View();
                 }
                 else if (String.IsNullOrEmpty(task_Report.start_date) || String.IsNullOrEmpty(task_Report.end_date))
@@ -129,9 +126,14 @@ namespace WebApplication2.Controllers
                     ViewBag.Notification = "start date and end date are required";
                     return View();
                 }
-                else if (String.IsNullOrEmpty(task_Report.emp_id.ToString()) || String.IsNullOrEmpty(task_Report.start_date) || String.IsNullOrEmpty(task_Report.end_date) || String.IsNullOrEmpty(task_Report.team_name) || String.IsNullOrEmpty(task_Report.summary) || String.IsNullOrEmpty(task_Report.task_duration.ToString()))
+                else if (db.Employees.All(x => x.id != task_Report.emp_id))
                 {
-                    ViewBag.Notification = "Id/start date/end date/summary/team name are required";
+                    ViewBag.Notification = "This employee id does not exists";
+                    return View();
+                }
+                else if (Convert.ToInt32(Session["IdUsSS1"]) != task_Report.emp_id)
+                {
+                    ViewBag.Notification = "employee id can't be changed";
                     return View();
                 }
                 else if (db.Team_names.All(x => x.Team_name != task_Report.team_name))
@@ -159,8 +161,8 @@ namespace WebApplication2.Controllers
                     task_Report.Active = 1;
                     db.Entry(task_Report).State = EntityState.Modified;
                     db.SaveChanges();
-                    ViewBag.Notification = "The report has been successfully saved!";
-                    return RedirectToAction("Index1");
+                    ViewBag.Notification1 = "The report has been successfully updated!";
+                    return View();
 
                 }
             }

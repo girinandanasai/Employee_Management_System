@@ -39,8 +39,9 @@ namespace WebApplication2.Controllers
                 {
                     db.Entry(employee).State = EntityState.Modified;
                     db.SaveChanges();
+                    ViewBag.Notification = "The record has been updated successfully";
                 }
-                return RedirectToAction("Index");
+                return View();
             }
             catch
             {

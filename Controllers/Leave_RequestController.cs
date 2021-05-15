@@ -26,20 +26,8 @@ namespace WebApplication2.Controllers
         {
             
             DBuserSignupLoginEntities3 db = new DBuserSignupLoginEntities3();
-            if (db.Employees.All(x => x.id != leave_Request.emp_id)
-                || db.Employees.All(x => x.Name != leave_Request.emp_name))
+            if (String.IsNullOrEmpty(leave_Request.emp_id.ToString()) || String.IsNullOrEmpty(leave_Request.emp_name) || String.IsNullOrEmpty(leave_Request.start_date) || String.IsNullOrEmpty(leave_Request.end_date) || String.IsNullOrEmpty(leave_Request.ref_no) || String.IsNullOrEmpty(leave_Request.reason))
             {
-                ViewBag.Notification = "This employee id or name does not exists";
-                return View();
-            }
-            else if (db.Employees.All(x => x.id != leave_Request.emp_id && x.Name != leave_Request.emp_name))
-            {
-                ViewBag.Notification = "This employee id and name does not match";
-                return View();
-            }
-            else if(Convert.ToInt32(Session["IdUsSS1"]) != leave_Request.emp_id)
-            {
-                ViewBag.Notification = "Give your employee id";
                 return View();
             }
             else if (String.IsNullOrEmpty(leave_Request.start_date) || String.IsNullOrEmpty(leave_Request.end_date) || String.IsNullOrEmpty(leave_Request.leave_type))
@@ -47,8 +35,21 @@ namespace WebApplication2.Controllers
                 ViewBag.Notification = "start date, end date and leave type are required";
                 return View();
             }
-            else if (String.IsNullOrEmpty(leave_Request.emp_id.ToString()) || String.IsNullOrEmpty(leave_Request.emp_name) || String.IsNullOrEmpty(leave_Request.start_date) || String.IsNullOrEmpty(leave_Request.end_date) || String.IsNullOrEmpty(leave_Request.ref_no) || String.IsNullOrEmpty(leave_Request.reason))
+            else if (db.Employees.All(x => x.id != leave_Request.emp_id)
+                || db.Employees.All(x => x.Name != leave_Request.emp_name))
             {
+                ViewBag.Notification = "This employee id or name does not exists";
+                return View();
+            }
+            else if (db.Employees.Any(x => x.id != leave_Request.emp_id && x.Name == leave_Request.emp_name)||
+                db.Employees.Any(x => x.id == leave_Request.emp_id && x.Name != leave_Request.emp_name))
+            {
+                ViewBag.Notification = "This employee id and name does not match";
+                return View();
+            }
+            else if(Convert.ToInt32(Session["IdUsSS1"]) != leave_Request.emp_id)
+            {
+                ViewBag.Notification = "Give your employee id";
                 return View();
             }
             else
@@ -76,7 +77,7 @@ namespace WebApplication2.Controllers
                     Comments=""
                 });
                 db.SaveChanges();
-                ViewBag.Notification = "The records are successfully saved";
+                ViewBag.Notification1 = "Your leave request has created. Please wait for approval/rejection";
                 return View();
             }
             
@@ -227,11 +228,11 @@ namespace WebApplication2.Controllers
                 user.reason = leave_Request.reason;
                 user.ref_no = leave_Request.ref_no;
                 db.SaveChanges();
-                ViewBag.Notification = "The record is updated";
+                ViewBag.Notification1 = "The record is updated successfully";
             }
             catch
             {
-                ViewBag.Notification = "The records are not updated";
+                ViewBag.Notification = "The record is not updated";
             }
             return View();
         }
@@ -255,7 +256,7 @@ namespace WebApplication2.Controllers
                 user.status = leave_Request.status;
                 user.Comments = leave_Request.Comments;
                 db.SaveChanges();
-                ViewBag.Notification = "The record is updated";
+                ViewBag.Notification1 = "The record is updated successfully";
             }
             catch
             {

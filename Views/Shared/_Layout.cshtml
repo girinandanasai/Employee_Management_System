@@ -36,7 +36,7 @@
                         <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
                     </ul>
                 }
-                else if(Session["IdUsSS1"] == null&& Session["UserNameSS"] == null)
+                else if (Session["IdUsSS1"] == null)
                 {
                     <ul class="nav navbar-nav" style="float:right !important">
                         <li>@Html.ActionLink("Signup", "LoginInfo1", "Home")</li>
@@ -54,7 +54,14 @@
                         <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
                     </ul>
                 }
-                
+                else if (Session["IdUsSS1"] != null&&Session["UserNameSS"] == null)
+                {
+                    <ul class="nav navbar-nav" style="float:right !important">
+                        <li>@Html.ActionLink("Signup", "LoginInfo1", "Home")</li>
+                        <li>@Html.ActionLink("Login", "LoginInfo2", "Home")</li>
+                    </ul>
+                }
+
             </div>
         </div>
     </div>

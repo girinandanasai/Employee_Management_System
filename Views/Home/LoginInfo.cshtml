@@ -1,10 +1,12 @@
-﻿@model WebApplication2.Models.TBLUserInfo
+﻿@model WebApplication2.Models.Admin
 
 @{
     ViewBag.Title = "Admin Home Page";
 }
 
-
+<h4 style="color:lightseagreen"> Welcome to Admin Home Page! Please select the suitable task to perform.
+    Admin can create, View Employee details and also view task reports created by 
+    employees and can view leave requests sent by employees which can approved/rejected.</h4>
 
 @using (Html.BeginForm())
 {
@@ -30,7 +32,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav" style="float:right !important">
                 <li><p style="color:#fff;margin-top:15px;">Hello @Session["UserNameSS"]</p></li>
-                <li>@Html.ActionLink("Logout", "Login", "Home")</li>
+                <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
             </ul>
         </div>
     </div>

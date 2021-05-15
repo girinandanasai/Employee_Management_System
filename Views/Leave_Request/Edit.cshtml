@@ -51,7 +51,7 @@
         @Html.LabelFor(model => model.leave_type, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <select name="@Html.NameFor(model=>model.leave_type)">
-                <option value="" selected disabled>--Select Leave Type--</option>
+                
                 <option>Sick Leave</option>
                 <option>Casual Leave</option>
                 <option>Earned Leave</option>
@@ -76,15 +76,18 @@
         </div>
     </div>
 
-  
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <label style="color:red">@ViewBag.Notification</label>
+            <label style="color:green">@ViewBag.Notification1</label>
+        </div>
+    </div>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+            <input type="submit" value="Save" style="background-color:#024488;color:#fff;width:6em;height:3em;"class="btn btn-default" />
         </div>
     </div>
-    <br/>
-    @ViewBag.Notification
 </div>
 }
 

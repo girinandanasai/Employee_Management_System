@@ -16,6 +16,8 @@ namespace WebApplication2.Models
 
     public partial class Admin
     {
+        [Required(ErrorMessage = "This Field is Required")]
+        [Display(Name = "Id")]
         public int IdUs { get; set; }
 
         [Required(ErrorMessage = "This Field is Required")]
@@ -26,7 +28,7 @@ namespace WebApplication2.Models
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
         [MinLength(8, ErrorMessage = "Minimum 8 characters required")]
-        
+
         public string PasswordUs { get; set; }
 
         [Required(ErrorMessage = "This Field is Required")]

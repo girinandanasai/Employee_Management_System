@@ -1,7 +1,7 @@
 ﻿@model WebApplication2.Models.Employee
 
 @{
-    Layout = null;
+    ViewBag.Title = "Delete";
 }
 
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
     <div>
         <h4>Delete Employee details</h4>
         <hr />
-        <dl class="divider">
+        <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.Name)
             </dt>
@@ -94,8 +94,8 @@
         @using (Html.BeginForm()) {
             @Html.AntiForgeryToken()
     
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
+            <div class="form-actions no-color" style="padding-left:80px;">
+                <input type="submit" value="Delete" style="background-color:#024488;color:#fff;"class="btn btn-default" /> |
                 @Html.ActionLink("Back to List", "Index")
             </div>
         }

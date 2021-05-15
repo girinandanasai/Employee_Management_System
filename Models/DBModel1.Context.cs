@@ -25,11 +25,11 @@ namespace WebApplication2.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Employee_Login> Employee_Login { get; set; }
-        public virtual DbSet<TBLUserInfo> TBLUserInfoes { get; set; }
+        public virtual DbSet<Leave_request> Leave_request { get; set; }
         public virtual DbSet<Task_report> Task_report { get; set; }
         public virtual DbSet<Team_names> Team_names { get; set; }
-        public virtual DbSet<Leave_request> Leave_request { get; set; }
     }
 }

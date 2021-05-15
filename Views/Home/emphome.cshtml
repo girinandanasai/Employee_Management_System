@@ -1,10 +1,14 @@
-﻿@model WebApplication2.Models.TBLUserInfo
+﻿@model WebApplication2.Models.Admin
 
 @{
     ViewBag.Title = "Employee home Page";
 }
 
-
+<h4 style="color:lightseagreen">
+    Welcome to Employee Home Page! Please select the suitable task to perform.
+    To create,delete,update and view task requests, Click on Task Report.
+    To create,delete,update and leave requests, Click on leave request.
+</h4>
 
 @using (Html.BeginForm())
 {

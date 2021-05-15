@@ -1,4 +1,5 @@
-﻿@model WebApplication2.Models.Employee_Login
+﻿
+@model WebApplication2.Models.Employee_Login
 
 @{
     ViewBag.Title = "Employee Register";
@@ -6,10 +7,10 @@
 
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
 <div class="form-horizontal">
     <h2>Employee Registration</h2>
     <hr />
@@ -22,18 +23,6 @@
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.role, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                <select name="@Html.NameFor(model=>model.role)">
-                    <option value="" selected disabled>--Select Role--</option>
-                    <option>Employee</option>
-                    <option>Admin</option>
-                </select>
-            </div>
-        </div>
-    </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -53,16 +42,17 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Register" class="btn btn-default" />
+            <label style="color:red">@ViewBag.Notification</label>
+            <label style="color:green">@ViewBag.Notification1</label>
         </div>
     </div>
+    
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <label>@ViewBag.Notification</label>
+            <input type="submit" value="Register" style="background-color:#024488;color:#fff;" class="btn btn-default" />
         </div>
     </div>
 </div>
+        
 }
-
-

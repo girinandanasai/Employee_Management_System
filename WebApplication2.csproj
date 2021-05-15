@@ -71,6 +71,9 @@
       <HintPath>packages\Microsoft.IO.RecyclableMemoryStream.1.4.1\lib\net46\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="Scrypt, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Scrypt.NET.1.3.0\lib\net20\Scrypt.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
@@ -202,6 +205,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Admin.cs">
+      <DependentUpon>DBModel1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DBModel1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -227,9 +233,6 @@
       <DependentUpon>DBModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Task_report.cs">
-      <DependentUpon>DBModel1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TBLUserInfo.cs">
       <DependentUpon>DBModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Team_names.cs">
@@ -304,19 +307,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Signup.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\InsertEmployee\Index.cshtml" />
     <Content Include="Views\EmployeeInsert\Index.cshtml" />
     <Content Include="Views\EmployeeInsert\Edit.cshtml" />
     <Content Include="Views\EmployeeInsert\Delete.cshtml" />
-    <Content Include="Views\Home\Signupe.cshtml" />
-    <Content Include="Views\Home\emphome.cshtml" />
     <Content Include="Views\Home\Logine.cshtml" />
-    <Content Include="Views\Home\Passupd.cshtml" />
-    <Content Include="Views\Home\LoginInfo.cshtml" />
-    <Content Include="Views\Home\LoginInfo1.cshtml" />
-    <Content Include="Views\Home\LoginInfo2.cshtml" />
     <Content Include="Views\Task_Report\Index.cshtml" />
     <Content Include="Views\Task_Report\Index1.cshtml" />
     <Content Include="Views\Task_Report\Edit.cshtml" />
@@ -328,6 +323,14 @@
     <Content Include="Views\Leave_Request\Edit.cshtml" />
     <Content Include="Views\Leave_Request\Delete.cshtml" />
     <Content Include="Views\Leave_Request\Edit1.cshtml" />
+    <Content Include="Views\Home\emphome.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\LoginInfo.cshtml" />
+    <Content Include="Views\Home\LoginInfo1.cshtml" />
+    <Content Include="Views\Home\LoginInfo2.cshtml" />
+    <Content Include="Views\Home\Signup.cshtml" />
+    <Content Include="Views\Home\Passupd.cshtml" />
+    <Content Include="Views\Home\Signupe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

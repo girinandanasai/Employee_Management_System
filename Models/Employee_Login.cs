@@ -24,7 +24,7 @@ namespace WebApplication2.Models
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
         [MinLength(6, ErrorMessage = "Minimum 6 characters required")]
-        
+
         public string password { get; set; }
         [Required(ErrorMessage = "This Field is Required")]
         [Display(Name = "Confirm Password")]

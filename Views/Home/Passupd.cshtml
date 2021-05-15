@@ -1,62 +1,70 @@
-﻿@model WebApplication2.Models.TBLUserInfo
+﻿@model WebApplication2.Models.Admin
 
 @{
-    ViewBag.Title = "Admin Password update";
+    ViewBag.Title = "Passupd";
 }
 
-<h2>Admin password update</h2>
+<h2>Password Update admin</h2>
 
-@using (Html.BeginForm("Passupd","Home",FormMethod.Post)) 
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
-<table class="center-block" style="padding:15px;">
-    <tr class="row">
-        <td>
-            Username
-        </td>
-        <td style="padding:15px;">
-            @Html.EditorFor(x => x.UserNameUs)
-        </td>
-        <td>
-            @Html.ValidationMessageFor(x => x.UserNameUs)
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        </td>
-    </tr>
-    <tr class="row">
-        <td>
-            Old Password
-        </td>
-        <td style="padding:15px;">
-            @Html.EditorFor(x => x.PasswordUs)
-        </td>
-        <td>
-            @Html.ValidationMessageFor(x => x.PasswordUs)
+    <div class="form-group">
+        @Html.LabelFor(model => model.IdUs, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.IdUs, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.IdUs, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
-        </td>
-    </tr>
-    <tr class="row">
-        <td>
-            New Password
-        </td>
-        <td style="padding:15px;">
-            @Html.EditorFor(x => x.NewPasswordUs)
-        </td>
-        <td>
-            @Html.ValidationMessageFor(x => x.NewPasswordUs)
-        </td>
-    </tr>
-    <tr class="row">
-        <td colspan="3" id="button" style="padding:15px;">
-            <input type="submit" value="change" />
-        </td>
-    </tr>
-    <tr class="row">
-        <td colspan="3">
-            @ViewBag.Message
-        </td>
-    </tr>
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserNameUs, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UserNameUs, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UserNameUs, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
-</table>
+    <div class="form-group">
+        @Html.LabelFor(model => model.PasswordUs, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PasswordUs, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PasswordUs, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NewPasswordUs, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NewPasswordUs, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NewPasswordUs, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ReNewPasswordUs, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ReNewPasswordUs, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ReNewPasswordUs, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <label style="color:red">@ViewBag.Message1</label>
+            <label style="color:green">@ViewBag.Message</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Update Password" style="background-color:#024488;width:10em;height:3em;color:#fff;" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
-

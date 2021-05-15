@@ -17,14 +17,19 @@ namespace WebApplication2.Models
     public partial class Employee
     {
         [Required(ErrorMessage = "This Field is Required")]
+        [Display(Name="Employee Id")]
         public int id { get; set; }
         [Required(ErrorMessage = "This Field is Required")]
+        [Display(Name = "Employee Name")]
         public string Name { get; set; }
         [Required(ErrorMessage = "This Field is Required")]
+        [Display(Name = "Date of Birth")]
         public string Date_of_birth { get; set; }
         [Required(ErrorMessage = "This Field is Required")]
+        [Display(Name = "Father Name")]
         public string Father_Name { get; set; }
         [Required(ErrorMessage = "This Field is Required")]
+        [Display(Name = "Mother Name")]
         public string Mother_Name { get; set; }
         [Required(ErrorMessage = "This Field is Required")]
         public string Address { get; set; }

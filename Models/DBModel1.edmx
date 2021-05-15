@@ -4,7 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DBuserSignupLoginModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DBuserSignupLoginModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="IdUs" />
+          </Key>
+          <Property Name="IdUs" Type="int" Nullable="false" />
+          <Property Name="UserNameUs" Type="nvarchar(max)" />
+          <Property Name="PasswordUs" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="id" />
@@ -25,9 +33,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="role" Type="nvarchar" MaxLength="50" />
-          <Property Name="password" Type="nvarchar" MaxLength="50" />
-          <Property Name="repassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Leave_request">
           <Key>
@@ -65,15 +71,6 @@
           <Property Name="risk_resolution" Type="nvarchar(max)" />
           <Property Name="Active" Type="int" />
         </EntityType>
-        <EntityType Name="TBLUserInfo">
-          <Key>
-            <PropertyRef Name="IdUs" />
-          </Key>
-          <Property Name="IdUs" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserNameUs" Type="varchar" MaxLength="20" />
-          <Property Name="PasswordUs" Type="varchar" MaxLength="255" />
-          <Property Name="RePasswordUs" Type="varchar" MaxLength="255" />
-        </EntityType>
         <EntityType Name="Team_names">
           <Key>
             <PropertyRef Name="id" />
@@ -82,17 +79,26 @@
           <Property Name="Team_name" Type="nvarchar(max)" />
         </EntityType>
         <EntityContainer Name="DBuserSignupLoginModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee_Login" EntityType="Self.Employee_Login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Leave_request" EntityType="Self.Leave_request" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Task_report" EntityType="Self.Task_report" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TBLUserInfo" EntityType="Self.TBLUserInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Team_names" EntityType="Self.Team_names" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBuserSignupLoginModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="IdUs" />
+          </Key>
+          <Property Name="IdUs" Type="Int32" Nullable="false" />
+          <Property Name="UserNameUs" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordUs" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="id" />
@@ -113,27 +119,27 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="repassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityType Name="TBLUserInfo">
+        <EntityType Name="Leave_request">
           <Key>
-            <PropertyRef Name="IdUs" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="IdUs" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserNameUs" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="PasswordUs" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="RePasswordUs" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emp_id" Type="Int32" Nullable="false" />
+          <Property Name="emp_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="start_date" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="end_date" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="leave_type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ref_no" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="file_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Content_type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="file_data" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="DBuserSignupLoginEntities3" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Employees" EntityType="Self.Employee" />
-          <EntitySet Name="Employee_Login" EntityType="Self.Employee_Login" />
-          <EntitySet Name="TBLUserInfoes" EntityType="Self.TBLUserInfo" />
-          <EntitySet Name="Task_report" EntityType="DBuserSignupLoginModel.Task_report" />
-          <EntitySet Name="Team_names" EntityType="DBuserSignupLoginModel.Team_names" />
-          <EntitySet Name="Leave_request" EntityType="DBuserSignupLoginModel.Leave_request" />
-        </EntityContainer>
         <EntityType Name="Task_report">
           <Key>
             <PropertyRef Name="id" />
@@ -141,11 +147,11 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="emp_id" Type="Int32" Nullable="false" />
           <Property Name="task_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="start_date" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="end_date" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="start_date" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="end_date" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="task_duration" Type="Int32" Nullable="false" />
-          <Property Name="team_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="summary" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="team_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="risk" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="risk_details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="risk_resolution" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -158,31 +164,29 @@
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="Team_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Leave_request">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="emp_id" Type="Int32" Nullable="false" />
-          <Property Name="emp_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="start_date" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="end_date" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="leave_type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="reason" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ref_no" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="status" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="file_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Content_type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="file_data" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="Active" Type="Int32" Nullable="false" />
-          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
+        <EntityContainer Name="DBuserSignupLoginEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Employee_Login" EntityType="Self.Employee_Login" />
+          <EntitySet Name="Leave_request" EntityType="Self.Leave_request" />
+          <EntitySet Name="Task_report" EntityType="Self.Task_report" />
+          <EntitySet Name="Team_names" EntityType="Self.Team_names" />
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DBuserSignupLoginModelStoreContainer" CdmEntityContainer="DBuserSignupLoginEntities3">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="DBuserSignupLoginModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="IdUs" ColumnName="IdUs" />
+                <ScalarProperty Name="UserNameUs" ColumnName="UserNameUs" />
+                <ScalarProperty Name="PasswordUs" ColumnName="PasswordUs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="DBuserSignupLoginModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
@@ -203,65 +207,53 @@
             <EntityTypeMapping TypeName="DBuserSignupLoginModel.Employee_Login">
               <MappingFragment StoreEntitySet="Employee_Login">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="role" ColumnName="role" />
                 <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="repassword" ColumnName="repassword" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TBLUserInfoes">
-            <EntityTypeMapping TypeName="DBuserSignupLoginModel.TBLUserInfo">
-              <MappingFragment StoreEntitySet="TBLUserInfo">
-                <ScalarProperty Name="IdUs" ColumnName="IdUs" />
-                <ScalarProperty Name="UserNameUs" ColumnName="UserNameUs" />
-                <ScalarProperty Name="PasswordUs" ColumnName="PasswordUs" />
-                <ScalarProperty Name="RePasswordUs" ColumnName="RePasswordUs" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Task_report">
-            <EntityTypeMapping TypeName="DBuserSignupLoginModel.Task_report">
-              <MappingFragment StoreEntitySet="Task_report">
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="risk_resolution" ColumnName="risk_resolution" />
-                <ScalarProperty Name="risk_details" ColumnName="risk_details" />
-                <ScalarProperty Name="risk" ColumnName="risk" />
-                <ScalarProperty Name="summary" ColumnName="summary" />
-                <ScalarProperty Name="team_name" ColumnName="team_name" />
-                <ScalarProperty Name="task_duration" ColumnName="task_duration" />
-                <ScalarProperty Name="end_date" ColumnName="end_date" />
-                <ScalarProperty Name="start_date" ColumnName="start_date" />
-                <ScalarProperty Name="task_name" ColumnName="task_name" />
-                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Team_names">
-            <EntityTypeMapping TypeName="DBuserSignupLoginModel.Team_names">
-              <MappingFragment StoreEntitySet="Team_names">
-                <ScalarProperty Name="Team_name" ColumnName="Team_name" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Leave_request">
             <EntityTypeMapping TypeName="DBuserSignupLoginModel.Leave_request">
               <MappingFragment StoreEntitySet="Leave_request">
-                <ScalarProperty Name="Comments" ColumnName="Comments" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="file_data" ColumnName="file_data" />
-                <ScalarProperty Name="Content_type" ColumnName="Content_type" />
-                <ScalarProperty Name="file_name" ColumnName="file_name" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="ref_no" ColumnName="ref_no" />
-                <ScalarProperty Name="reason" ColumnName="reason" />
-                <ScalarProperty Name="leave_type" ColumnName="leave_type" />
-                <ScalarProperty Name="end_date" ColumnName="end_date" />
-                <ScalarProperty Name="start_date" ColumnName="start_date" />
-                <ScalarProperty Name="emp_name" ColumnName="emp_name" />
-                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="emp_name" ColumnName="emp_name" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="leave_type" ColumnName="leave_type" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="ref_no" ColumnName="ref_no" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="file_name" ColumnName="file_name" />
+                <ScalarProperty Name="Content_type" ColumnName="Content_type" />
+                <ScalarProperty Name="file_data" ColumnName="file_data" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Task_report">
+            <EntityTypeMapping TypeName="DBuserSignupLoginModel.Task_report">
+              <MappingFragment StoreEntitySet="Task_report">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="task_name" ColumnName="task_name" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="task_duration" ColumnName="task_duration" />
+                <ScalarProperty Name="team_name" ColumnName="team_name" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="risk" ColumnName="risk" />
+                <ScalarProperty Name="risk_details" ColumnName="risk_details" />
+                <ScalarProperty Name="risk_resolution" ColumnName="risk_resolution" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Team_names">
+            <EntityTypeMapping TypeName="DBuserSignupLoginModel.Team_names">
+              <MappingFragment StoreEntitySet="Team_names">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Team_name" ColumnName="Team_name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

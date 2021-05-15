@@ -22,7 +22,7 @@ namespace WebApplication2.Controllers
             DBuserSignupLoginEntities3 db = new DBuserSignupLoginEntities3();
             if (db.Employees.Any(x => x.id == sc.id))
             {
-                ViewBag.Notification = "This Employee already exists";
+                ViewBag.message = "This Employee already exists";
                 return View();
             }
             else
@@ -33,7 +33,7 @@ namespace WebApplication2.Controllers
                 var saveemployee = insertemployee.Result;
                 if (saveemployee.IsSuccessStatusCode)
                 {
-                    ViewBag.message = "Record is saved successfully";
+                    ViewBag.message1 = "Employee with id "+sc.id+" has created succesfully!";
                 }
                 else
                 {
