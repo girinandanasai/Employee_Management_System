@@ -3,12 +3,9 @@
 @{
     ViewBag.Title = "Employee home Page";
 }
+<h3 style="color:lightseagreen;"> Welcome to Employee Home Page! </h3>
+<h4 style="color:darkorange;">Please select the suitable task to perform</h4>
 
-<h4 style="color:lightseagreen">
-    Welcome to Employee Home Page! Please select the suitable task to perform.
-    To create,delete,update and view task requests, Click on Task Report.
-    To create,delete,update and leave requests, Click on leave request.
-</h4>
 
 @using (Html.BeginForm())
 {
@@ -29,6 +26,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav" style="float:right !important">
+                <li><p style="color:#fff;margin-top:15px;">Hello @Session["UserNameSS"]</p></li>
+                <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+            </ul>
         </div>
     </div>
 </div>

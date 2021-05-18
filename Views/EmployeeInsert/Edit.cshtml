@@ -3,7 +3,14 @@
 @{
     ViewBag.Title = "Edit";
 }
+@if (TempData["message"] != null)
+{
+    <script>
+        alert('@TempData["message"]');
+        window.location.href = "https://localhost:44327/EmployeeInsert/Index";
+    </script>
 
+}
 
 @using (Html.BeginForm())
 {
@@ -66,16 +73,26 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Fresher, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Fresher, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Fresher, "", new { @class = "text-danger" })
+                <select class="form-control" name="@Html.NameFor(model=>model.Fresher)" >
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Role, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+                @*@Html.EditorFor(model => model.Role, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })*@
+                <select class="form-control" name="@Html.NameFor(model=>model.Role)" >
+                    <option>Trainee</option>
+                    <option>Assistant System Engineer</option>
+                    <option>System Engineer</option>
+                    <option>IT Analyst</option>
+                    <option>Manager</option>
+                    <option>Lead</option>
+                </select>
             </div>
         </div>
 

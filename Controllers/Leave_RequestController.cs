@@ -32,24 +32,19 @@ namespace WebApplication2.Controllers
             }
             else if (String.IsNullOrEmpty(leave_Request.start_date) || String.IsNullOrEmpty(leave_Request.end_date) || String.IsNullOrEmpty(leave_Request.leave_type))
             {
-                ViewBag.Notification = "start date, end date and leave type are required";
+                //ViewBag.Notification = "start date, end date and leave type are required";
                 return View();
             }
             else if (db.Employees.All(x => x.id != leave_Request.emp_id)
                 || db.Employees.All(x => x.Name != leave_Request.emp_name))
             {
-                ViewBag.Notification = "This employee id or name does not exists";
+                ViewBag.Notification = "This employee name does not exists";
                 return View();
             }
             else if (db.Employees.Any(x => x.id != leave_Request.emp_id && x.Name == leave_Request.emp_name)||
                 db.Employees.Any(x => x.id == leave_Request.emp_id && x.Name != leave_Request.emp_name))
             {
-                ViewBag.Notification = "This employee id and name does not match";
-                return View();
-            }
-            else if(Convert.ToInt32(Session["IdUsSS1"]) != leave_Request.emp_id)
-            {
-                ViewBag.Notification = "Give your employee id";
+                ViewBag.Notification = "This employee name does not match with id";
                 return View();
             }
             else
@@ -77,8 +72,9 @@ namespace WebApplication2.Controllers
                     Comments=""
                 });
                 db.SaveChanges();
-                ViewBag.Notification1 = "Your leave request has created. Please wait for approval/rejection";
-                return View();
+                //ViewBag.Notification1 = "Your leave request has created. Please wait for approval/rejection";
+                TempData["message"] = "Leave Request has been created successfully!";
+                return RedirectToAction("Index","Leave_Request");
             }
             
         }
@@ -228,7 +224,8 @@ namespace WebApplication2.Controllers
                 user.reason = leave_Request.reason;
                 user.ref_no = leave_Request.ref_no;
                 db.SaveChanges();
-                ViewBag.Notification1 = "The record is updated successfully";
+                TempData["message"] = "Leave Request has been updated successfully!";
+                return RedirectToAction("Edit", "Leave_Request");
             }
             catch
             {
@@ -256,7 +253,8 @@ namespace WebApplication2.Controllers
                 user.status = leave_Request.status;
                 user.Comments = leave_Request.Comments;
                 db.SaveChanges();
-                ViewBag.Notification1 = "The record is updated successfully";
+                TempData["message"] = "Leave Request has been commented successfully!";
+                return RedirectToAction("Edit1", "Leave_Request");
             }
             catch
             {
@@ -288,8 +286,8 @@ namespace WebApplication2.Controllers
                     //db.Task_report.Remove(task_Report);
                     db.SaveChanges();
                 }
-                ViewBag.Notification = "The record is deleted successfully";
-                return View();
+                TempData["message"] = "Leave Request has been deleted successfully!";
+                return RedirectToAction("Delete", "Leave_Request");
             }
             catch
             {

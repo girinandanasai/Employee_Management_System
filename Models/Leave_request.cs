@@ -17,29 +17,31 @@ namespace WebApplication2.Models
     public partial class Leave_request
     {
         public int id { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Employee Id is required")]
         [Display(Name = "Employee Id")]
         public int emp_id { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Employee Name is required")]
         [Display(Name = "Employee Name")]
         public string emp_name { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Start Date is required")]
         [Display(Name = "Start Date")]
+        [DataType(DataType.Date)]
         public string start_date { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "End Date is required")]
         [Display(Name = "End Date")]
+        [DataType(DataType.Date)]
         public string end_date { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Leave Type is required")]
         [Display(Name = "Leave Type")]
         public string leave_type { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Reason is required")]
         [Display(Name = "Reason")]
         public string reason { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
-        [Display(Name = "Reference No:")]
+        [Required(ErrorMessage = "Reference Number is required")]
+        [Display(Name = "Reference No")]
         public string ref_no { get; set; }
         public string status { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Support Document is required")]
         [Display(Name = "Support Document")]
         public string file_name { get; set; }
         public string Content_type { get; set; }

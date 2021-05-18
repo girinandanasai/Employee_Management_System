@@ -22,7 +22,7 @@ namespace WebApplication2.Controllers
             DBuserSignupLoginEntities3 db = new DBuserSignupLoginEntities3();
             if (db.Employees.Any(x => x.id == sc.id))
             {
-                ViewBag.message = "This Employee already exists";
+                ViewBag.message = "This Employee with id "+sc.id+" already exists";
                 return View();
             }
             else
@@ -33,11 +33,12 @@ namespace WebApplication2.Controllers
                 var saveemployee = insertemployee.Result;
                 if (saveemployee.IsSuccessStatusCode)
                 {
-                    ViewBag.message1 = "Employee with id "+sc.id+" has created succesfully!";
+                    TempData["message"] = "Employee with id "+sc.id+" has been created successfully!";
+                    return RedirectToAction("Index", "InsertEmployee");
                 }
                 else
                 {
-                    ViewBag.message = "Please give the required fields";
+                    //ViewBag.message = "Please give the required fields";
                 }
                 return View();
             }

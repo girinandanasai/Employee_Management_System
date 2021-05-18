@@ -39,9 +39,10 @@ namespace WebApplication2.Controllers
                 {
                     db.Entry(employee).State = EntityState.Modified;
                     db.SaveChanges();
-                    ViewBag.Notification = "The record has been updated successfully";
+                    TempData["message"] = "Employee details for employee id "+id+" has been updated successfully!";
+                    return RedirectToAction("Edit", "EmployeeInsert");
                 }
-                return View();
+                //return View();
             }
             catch
             {
@@ -70,7 +71,8 @@ namespace WebApplication2.Controllers
                     db.Employees.Remove(employee);
                     db.SaveChanges();
                 }
-                return RedirectToAction("Index");
+                TempData["message"] = "Employee details for employee id "+id+" has been deleted successfully!";
+                return RedirectToAction("Delete", "EmployeeInsert");
             }
             catch
             {

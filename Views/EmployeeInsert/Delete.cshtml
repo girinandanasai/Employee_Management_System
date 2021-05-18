@@ -3,6 +3,15 @@
 @{
     ViewBag.Title = "Delete";
 }
+@if (TempData["message"] != null)
+{
+    <script>
+        alert('@TempData["message"]');
+        window.location.href = "https://localhost:44327/EmployeeInsert/Index";
+    </script>
+
+}
+
 
 <!DOCTYPE html>
 
@@ -20,82 +29,83 @@
             <dt>
                 @Html.DisplayNameFor(model => model.Name)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Name)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Date_of_birth)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Date_of_birth)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Father_Name)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Father_Name)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Mother_Name)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Mother_Name)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Address)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Address)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Salary)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Salary)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Fresher)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Fresher)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Role)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Role)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Notes)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Notes)
             </dd>
-    
+
         </dl>
-    
-        @using (Html.BeginForm()) {
+
+        @using (Html.BeginForm())
+        {
             @Html.AntiForgeryToken()
-    
+
             <div class="form-actions no-color" style="padding-left:100px;">
-                <input type="submit" value="Delete" style="background-color:#024488;color:#fff;"class="btn btn-default" /> |
+                <input type="submit" value="Delete" style="background-color:#024488;color:#fff;" class="btn btn-default" /> |
                 @Html.ActionLink("Back to List", "Index")
             </div>
         }

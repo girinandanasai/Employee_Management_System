@@ -16,41 +16,41 @@ namespace WebApplication2.Models
 
     public partial class Admin
     {
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Id is required")]
         [Display(Name = "Id")]
         public int IdUs { get; set; }
 
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Username is required")]
         [Display(Name = "Username")]
         public string UserNameUs { get; set; }
 
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Password is required")]
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
-        [MinLength(8, ErrorMessage = "Minimum 8 characters required")]
+        [MinLength(6, ErrorMessage = "Minimum 6 characters required")]
 
         public string PasswordUs { get; set; }
 
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Confirm Password is required")]
         [Display(Name = "Confirm Password")]
         [DataType(DataType.Password)]
-        [Compare("PasswordUs", ErrorMessage = "Confirm password does n't match, type again!")]
+        [Compare("PasswordUs", ErrorMessage = "Confirm password does not match, type again!")]
         [NotMapped]
         public string RePasswordUs { get; set; }
 
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "New Password is required")]
         [Display(Name = "New Password")]
         [DataType(DataType.Password)]
         [NotMapped]
         public string NewPasswordUs { get; set; }
 
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Confirm New Password is required")]
         [Display(Name = "Confirm New Password")]
         [DataType(DataType.Password)]
-        [Compare("NewPasswordUs", ErrorMessage = "New Confirm password does n't match, type again!")]
+        [Compare("NewPasswordUs", ErrorMessage = "New Confirm password does not match, type again!")]
         [NotMapped]
         public string ReNewPasswordUs { get; set; }
 
-
+    
     }
 }

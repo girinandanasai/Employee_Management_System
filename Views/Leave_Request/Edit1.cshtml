@@ -3,108 +3,115 @@
 @{
     ViewBag.Title = "Approval/rejection of Leave Request";
 }
+@if (TempData["message"] != null)
+{
+    <script>
+        alert('@TempData["message"]');
+        window.location.href = "https://localhost:44327/Leave_Request/Index2";
+    </script>
 
+}
 <h2>Approval/Rejection of Leave Request</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Leave_request</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.id)
 
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.emp_id)
-        </dt>
+    <div class="form-horizontal">
+        <h4>Leave_request</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
 
-        <dd>
-            @Html.DisplayFor(model => model.emp_id)
-        </dd>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.emp_id)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.emp_name)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.emp_id)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.emp_name)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.emp_name)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.start_date)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.emp_name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.start_date)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.start_date)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.end_date)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.start_date)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.end_date)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.end_date)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.leave_type)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.end_date)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.leave_type)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.leave_type)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.reason)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.leave_type)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.reason)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.reason)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ref_no)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.reason)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ref_no)
-        </dd>
-    </dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.ref_no)
+            </dt>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.status, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+            <dd>
+                @Html.DisplayFor(model => model.ref_no)
+            </dd>
+        </dl>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.status, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <label style="color:red">@ViewBag.Notification</label>
+                <label style="color:green">@ViewBag.Notification1</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" style="background-color:#024488;color:#fff;width:6em;height:3em;" class="btn btn-default" />
+            </div>
         </div>
     </div>
-
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <label style="color:red">@ViewBag.Notification</label>
-            <label style="color:green">@ViewBag.Notification1</label>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" style="background-color:#024488;color:#fff;width:6em;height:3em;" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
 
 <div>

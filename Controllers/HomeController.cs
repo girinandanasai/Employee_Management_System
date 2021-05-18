@@ -89,13 +89,11 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ActionResult Signupe(Employee_Login employee_Login,Employee employee)
         {
+            ViewBag.msg1 = employee_Login.password;
+            ViewBag.msg2 = employee_Login.repassword;
             ScryptEncoder encoder = new ScryptEncoder();
-            if (db.Employee_Login.Any(x => x.id == employee_Login.id))
-            {
-                ViewBag.Notification = "This account already exists";
-                return View();
-            }
-            else if (String.IsNullOrEmpty(employee_Login.id)|| String.IsNullOrEmpty(employee_Login.password)|| String.IsNullOrEmpty(employee_Login.repassword))
+            
+            if (String.IsNullOrEmpty(employee_Login.id)|| String.IsNullOrEmpty(employee_Login.password)|| String.IsNullOrEmpty(employee_Login.repassword))
             {
                 
                 return View();
@@ -108,6 +106,11 @@ namespace WebApplication2.Controllers
             else if (employee_Login.password.ToString().Length < 6 )
             {
                 //ViewBag.Notification = "Password should be minimum 8 characters and less than 15 characters";
+                return View();
+            }
+            else if (db.Employee_Login.Any(x => x.id == employee_Login.id))
+            {
+                ViewBag.Notification = "This employee with id " + employee_Login.id + " already registered!";
                 return View();
             }
             else if(db.Employees.All(x => x.id.ToString() != employee_Login.id))
@@ -126,9 +129,11 @@ namespace WebApplication2.Controllers
                     repassword=k2
                 });
                 db.SaveChanges();
-                ViewBag.Notification1 = "The account has been successfully registered!Please login to continue";
-                Session["IdUsSS1"] = employee_Login.id.ToString();
-                return View();
+                //ViewBag.Notification1 = "The account has been successfully registered!Please login to continue";
+                //Session["IdUsSS1"] = employee_Login.id.ToString();
+                TempData["message"] = "Employee with id " + employee_Login.id + " has been created successfully!";
+                return RedirectToAction("Signupe", "Home");
+                //return View();
             }
 
         }
@@ -157,32 +162,37 @@ namespace WebApplication2.Controllers
         {
             using (DBuserSignupLoginEntities3 db=new DBuserSignupLoginEntities3())
             {
+                ViewBag.msg1 = admin.PasswordUs;
+                ViewBag.msg2 = admin.NewPasswordUs;
+                ViewBag.msg3 = admin.ReNewPasswordUs;
                if(String.IsNullOrEmpty(admin.IdUs.ToString()) || String.IsNullOrEmpty(admin.PasswordUs) || String.IsNullOrEmpty(admin.NewPasswordUs) || String.IsNullOrEmpty(admin.ReNewPasswordUs)|| admin.NewPasswordUs!=admin.ReNewPasswordUs)
                 {
-                    return View();
+                    return View(admin);
                 }
                 else if (db.Admins.All(x => x.IdUs != admin.IdUs))
                 {
-                    ViewBag.Message1 = "This account does not exists";
-                    return View();
+                    ViewBag.Message1 = "The admin with id "+admin.IdUs+" does not exists";
+                    return View(admin);
                 }
-                var valid = (from c in db.Admins where c.UserNameUs.Equals(admin.UserNameUs) select c).SingleOrDefault();
+                var valid = (from c in db.Admins where c.IdUs.Equals(admin.IdUs) select c).SingleOrDefault();
                 ScryptEncoder encoder = new ScryptEncoder();
                 bool isvalid = encoder.Compare(admin.PasswordUs, valid.PasswordUs);
                 if (valid != null )
                 {
-                    Admin admin1 = db.Admins.Where(x => x.UserNameUs == admin.UserNameUs).FirstOrDefault();
-                    Admin k = db.Admins.Find(admin1.IdUs);
-                    db.Admins.Remove(k);
-                    db.SaveChanges();
+                    Admin admin1 = db.Admins.Where(x => x.IdUs == admin.IdUs).FirstOrDefault();
+                    
                     if (admin1 != null && isvalid && admin.NewPasswordUs == admin.ReNewPasswordUs)
                     {
+                        Admin k = db.Admins.Find(admin1.IdUs);
+                        String s1 = admin1.UserNameUs;
+                        db.Admins.Remove(k);
+                        db.SaveChanges();
                         String k1 = admin.NewPasswordUs;
                         String k2 = encoder.Encode(k1);
                         db.Admins.Add(new Admin()
                         {
                             IdUs=admin.IdUs,
-                            UserNameUs=admin.UserNameUs,
+                            UserNameUs=s1,
                             PasswordUs=k2,
                             NewPasswordUs=k2,
                             RePasswordUs=k2,
@@ -190,11 +200,12 @@ namespace WebApplication2.Controllers
                         });
             
                         db.SaveChanges();
-                        ViewBag.Message = "Password changed successfully";
+                        TempData["message"] = "Password for admin Id " + admin.IdUs + " has been updated successfully!";
+                        return RedirectToAction("Passupd", "Home");
                     }
                     else
                     {
-                        ViewBag.Message1 = "Current password is incorrect";
+                        ViewBag.Message1 = "Old password is incorrect";
                     }
                 }
             }
@@ -205,6 +216,7 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(Admin admin)
         {
+            ViewBag.msg1 = admin.PasswordUs;
             if (String.IsNullOrEmpty(admin.UserNameUs) || String.IsNullOrEmpty(admin.PasswordUs))
             {
 
@@ -214,7 +226,7 @@ namespace WebApplication2.Controllers
             var valid = (from c in db.Admins where c.UserNameUs.Equals(admin.UserNameUs) select c).SingleOrDefault();
             if (db.Admins.All(x => x.UserNameUs != admin.UserNameUs))
             {
-                ViewBag.Message1 = "This account does not exists";
+                ViewBag.Message1 = "The username "+admin.UserNameUs+" does not exists";
                 return View();
             }
             bool isvalid = encoder.Compare(admin.PasswordUs, valid.PasswordUs);
@@ -224,6 +236,10 @@ namespace WebApplication2.Controllers
                 Session["IdUsSS"] = admin.IdUs.ToString();
                 Session["UserNameSS"] = admin.UserNameUs.ToString();
                 return RedirectToAction("LoginInfo", "Home");
+            }
+            else if(admin.PasswordUs.Length<6)
+            {
+                return View();
             }
             else
             {
@@ -236,6 +252,7 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Logine(Employee_Login employee_Login)
         {
+            ViewBag.msg1 = employee_Login.password;
             ScryptEncoder encoder = new ScryptEncoder();
             if (String.IsNullOrEmpty(employee_Login.id) || String.IsNullOrEmpty(employee_Login.password))
             {
@@ -243,7 +260,7 @@ namespace WebApplication2.Controllers
             }
             else if (db.Employee_Login.All(x => x.id != employee_Login.id))
             {
-                ViewBag.Notification1 = "This account does not exists";
+                ViewBag.Notification1 = "This employee id "+employee_Login.id+" does not exists";
                 return View();
             }
             var valid = (from c in db.Employee_Login where c.id.Equals(employee_Login.id) select c).SingleOrDefault();
@@ -252,11 +269,16 @@ namespace WebApplication2.Controllers
             if (checkLogin != null&&isvalid==true)
             {
                 Session["IdUsSS1"] = employee_Login.id.ToString();
+                //TempData["mydata"] =Session["IdUsSS1"];
                 return RedirectToAction("emphome", "Home");
+            }
+            else if(employee_Login.password.Length<6)
+            {
+                return View();
             }
             else
             {
-                ViewBag.Notification1 = "Incorrect Password";
+                ViewBag.Notification1 = "Incorrect Id or Password";
             }
             return View();
         }

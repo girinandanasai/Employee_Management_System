@@ -16,25 +16,29 @@ namespace WebApplication2.Models
     public partial class Task_report
     {
         public int id { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Employee Id is required")]
         [Display(Name = "Employee Id")]
         public int emp_id { get; set; }
+        [Required(ErrorMessage = "Task Name is required")]
         [Display(Name = "Task Name")]
         public string task_name { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Start Date is required")]
         [Display(Name = "Start Date")]
+        [DataType(DataType.Date)]
         public string start_date { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "End Date is required")]
+        [DataType(DataType.Date)]
         [Display(Name = "End Date")]
         public string end_date { get; set; }
         [Display(Name = "Task Duration")]
         public int task_duration { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Team Name is required")]
         [Display(Name = "Team Name")]
         public string team_name { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Summary is required")]
         [Display(Name = "Summary")]
         public string summary { get; set; }
+        [Display(Name = "Risk")]
         public string risk { get; set; }
         [Display(Name = "Risk Details")]
         public string risk_details { get; set; }

@@ -16,20 +16,20 @@ namespace WebApplication2.Models
 
     public partial class Employee_Login
     {
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Id is required")]
         [Display(Name = "Id")]
         public string id { get; set; }
 
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Password is required")]
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
         [MinLength(6, ErrorMessage = "Minimum 6 characters required")]
 
         public string password { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Confirm Password is required")]
         [Display(Name = "Confirm Password")]
         [DataType(DataType.Password)]
-        [Compare("password", ErrorMessage = "Confirm password does n't match, type again!")]
+        [Compare("password", ErrorMessage = "Confirm password does not match, type again!")]
         [NotMapped]
         public string repassword { get; set; }
     }

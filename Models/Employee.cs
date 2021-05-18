@@ -16,30 +16,31 @@ namespace WebApplication2.Models
 
     public partial class Employee
     {
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Employee Id is required")]
         [Display(Name="Employee Id")]
         public int id { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Employee Name is required")]
         [Display(Name = "Employee Name")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Date of Birth is required")]
         [Display(Name = "Date of Birth")]
+        [DataType(DataType.Date)]
         public string Date_of_birth { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Father Name is required")]
         [Display(Name = "Father Name")]
         public string Father_Name { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Mother Name is required")]
         [Display(Name = "Mother Name")]
         public string Mother_Name { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Address is required")]
         public string Address { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Salary is required")]
         public Nullable<int> Salary { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Fresher is required")]
         public string Fresher { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Role is required")]
         public string Role { get; set; }
-        [Required(ErrorMessage = "This Field is Required")]
+        [Required(ErrorMessage = "Notes is required")]
         public string Notes { get; set; }
     }
 }

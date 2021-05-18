@@ -36,12 +36,12 @@ namespace WebApplication2.Controllers
             }
             else if (String.IsNullOrEmpty(task_Report.start_date) || String.IsNullOrEmpty(task_Report.end_date))
             {
-                ViewBag.Notification = "start date and end date are required";
+                //ViewBag.Notification = "start date and end date are required";
                 return View();
             }
             else if (db.Employees.All(x => x.id != task_Report.emp_id))
             {
-                ViewBag.Notification = "This employee id does not exists";
+                ViewBag.Notification = "This employee id "+task_Report.emp_id+" does not exists";
                 return View();
             }
             else if(Convert.ToInt32(Session["IdUsSS1"]) != task_Report.emp_id)
@@ -58,7 +58,7 @@ namespace WebApplication2.Controllers
             {
                 if (String.IsNullOrEmpty(task_Report.risk_details) || String.IsNullOrEmpty(task_Report.risk_resolution))
                 {
-                    ViewBag.Notification = "Risk details and risk resolution are required";
+                    ViewBag.Notification = "Risk details/risk resolution are required when risk is there";
                     return View();
                 }
                 else
@@ -74,12 +74,30 @@ namespace WebApplication2.Controllers
                     ViewData["msg"] = task_Report;
                     db.Task_report.Add(task_Report);
                     db.SaveChanges();
-                    ViewBag.Notification1 = "The task report has been successfully created!";
-                    return View();
+                    //ViewBag.Notification1 = "The task report has been successfully created!";
+                    TempData["message"] = "Task Report has been created successfully!";
+                    return RedirectToAction("Index","Task_Report");
                 }
                 
             }
-            return View();
+            else
+            {
+                DateTime startD = DateTime.Parse(task_Report.start_date);
+                DateTime endD = DateTime.Parse(task_Report.end_date);
+                double calcBusinessDays = 1 + ((endD - startD).TotalDays * 5 - (startD.DayOfWeek - endD.DayOfWeek) * 2) / 7;
+
+                if (endD.DayOfWeek == DayOfWeek.Saturday) calcBusinessDays--;
+                if (startD.DayOfWeek == DayOfWeek.Sunday) calcBusinessDays--;
+                task_Report.task_duration = (int)calcBusinessDays;
+                task_Report.Active = 1;
+                ViewData["msg"] = task_Report;
+                db.Task_report.Add(task_Report);
+                db.SaveChanges();
+                //ViewBag.Notification1 = "The task report has been successfully created!";
+                TempData["message"] = "Task Report has been created successfully!";
+                return RedirectToAction("Index", "Task_Report");
+            }
+            //return View();
            
         }
         // GET: EmployeeInsert
@@ -147,6 +165,23 @@ namespace WebApplication2.Controllers
                     {
                         ViewBag.Notification = "Risk details and risk resolution are required";
                     }
+                    else
+                    {
+                        DateTime startD = DateTime.Parse(task_Report.start_date);
+                        DateTime endD = DateTime.Parse(task_Report.end_date);
+                        double calcBusinessDays = 1 + ((endD - startD).TotalDays * 5 - (startD.DayOfWeek - endD.DayOfWeek) * 2) / 7;
+
+                        if (endD.DayOfWeek == DayOfWeek.Saturday) calcBusinessDays--;
+                        if (startD.DayOfWeek == DayOfWeek.Sunday) calcBusinessDays--;
+                        task_Report.task_duration = (int)calcBusinessDays;
+                        task_Report.Active = 1;
+                        ViewData["msg"] = task_Report;
+                        db.Task_report.Add(task_Report);
+                        db.SaveChanges();
+                        //ViewBag.Notification1 = "The task report has been successfully created!";
+                        TempData["message"] = "Task Report has been updated successfully!";
+                        return RedirectToAction("Edit", "Task_Report");
+                    }
                     return View();
                 }
                 else
@@ -161,8 +196,8 @@ namespace WebApplication2.Controllers
                     task_Report.Active = 1;
                     db.Entry(task_Report).State = EntityState.Modified;
                     db.SaveChanges();
-                    ViewBag.Notification1 = "The report has been successfully updated!";
-                    return View();
+                    TempData["message"] = "Task Report has been updated successfully!";
+                    return RedirectToAction("Edit", "Task_Report");
 
                 }
             }
@@ -196,7 +231,8 @@ namespace WebApplication2.Controllers
                     //db.Task_report.Remove(task_Report);
                     db.SaveChanges();
                 }
-                return RedirectToAction("Index1");
+                TempData["message"] = "Task Report has been deleted successfully!";
+                return RedirectToAction("Delete", "Task_Report");
             }
             catch
             {

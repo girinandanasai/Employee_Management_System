@@ -3,7 +3,14 @@
 @{
     ViewBag.Title = "Delete Task Report Details";
 }
+@if (TempData["message"] != null)
+{
+    <script>
+        alert('@TempData["message"]');
+        window.location.href = "https://localhost:44327/Task_Report/Index1";
+    </script>
 
+}
 <h2>Delete Task Report</h2>
 
 <h3>Are you sure you want to delete this?</h3>
@@ -90,10 +97,7 @@
             @Html.DisplayFor(model => model.risk_resolution)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Active)
-        </dt>
-
+        
 
     </dl>
     <br /><br />
